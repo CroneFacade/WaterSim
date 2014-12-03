@@ -30,15 +30,19 @@ namespace WaterSim
                 {
                     case ConsoleKey.LeftArrow:
                         currentX--;
+                        GUI.CurrentCursorPosition(currentX, currentY);
                         break;
                     case ConsoleKey.RightArrow:
                         currentX++;
+                        GUI.CurrentCursorPosition(currentX, currentY);
                         break;
                     case ConsoleKey.UpArrow:
                         currentY--;
+                        GUI.CurrentCursorPosition(currentX, currentY);
                         break;
                     case ConsoleKey.DownArrow:
                         currentY++;
+                        GUI.CurrentCursorPosition(currentX, currentY);
                         break;
                     case ConsoleKey.B:
                         var newBorder = new Borders(false);

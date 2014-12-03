@@ -7,7 +7,7 @@ namespace WaterSim
 {
     class Simulation
     {
-        List<Borders> LineBorders;
+        public List<Borders> LineBorders;
 
         public Simulation()
         {
@@ -45,22 +45,41 @@ namespace WaterSim
                         GUI.CurrentCursorPosition(currentX, currentY);
                         break;
                     case ConsoleKey.B:
-                        var newBorder = new Borders(false);
-                        newBorder.PositionX = currentX;
-                        newBorder.PositionY = currentY;
-                        LineBorders.Add(newBorder);
-                        GUI.PrintBorder(newBorder);
+                        var findBorder = LookForBorder(currentX, currentY);
+
+                        if (findBorder == null)
+                        {
+                            CreateNewBorder(currentX, currentY);
+                        }
                         break;
                     case ConsoleKey.D:
-                        Borders BorderToDelete = LookForBorder(currentX, currentY);
-                        GUI.CleanPosition(BorderToDelete, currentX, currentY);
-                        LineBorders.Remove(BorderToDelete);
+                        DeleteBorder(currentX, currentY);
+                        break;
+                    case ConsoleKey.Q:
+                        keepGoing = false;
                         break;
                     default:
                         break;
                 }
                 
             }
+        }
+
+        private void DeleteBorder(int currentX, int currentY)
+        {
+            Borders BorderToDelete = LookForBorder(currentX, currentY);
+            GUI.CleanPosition(BorderToDelete, currentX, currentY);
+            LineBorders.Remove(BorderToDelete);
+        }
+
+        private void CreateNewBorder(int currentX, int currentY)
+        {
+            var newBorder = new Borders(false);
+            newBorder.PositionX = currentX;
+            newBorder.PositionY = currentY;
+            LineBorders.Add(newBorder);
+            GUI.PrintBorder(newBorder);
+
         }
 
         private Borders LookForBorder(int currentX, int currentY)

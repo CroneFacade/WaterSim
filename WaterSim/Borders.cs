@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WaterSim
 {
-    class Borders
+    public class Borders
     {
         public string PrintedName { get; set; }
         public bool Breakable { get; set; }

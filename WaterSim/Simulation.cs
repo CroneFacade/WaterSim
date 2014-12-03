@@ -9,14 +9,6 @@ namespace WaterSim
     {
         List<Borders> LineBorders;
 
-        public enum MoveCursor
-        {
-            Up,
-            Down,
-            Left,
-            Right
-        }
-
         public Simulation()
         {
             LineBorders = new List<Borders>();
@@ -25,7 +17,58 @@ namespace WaterSim
 
         internal void CreateMap()
         {
-            throw new NotImplementedException();
+            int currentX = 0;
+            int currentY = 0;
+            bool keepGoing = true;
+            while (keepGoing)
+            {
+                Borders empty = LookForBorder(currentX, currentY);
+                ConsoleKeyInfo pressedKey = Console.ReadKey();
+                GUI.CleanPosition(empty, currentX, currentY);
+
+                switch (pressedKey.Key)
+                {
+                    case ConsoleKey.LeftArrow:
+                        currentX--;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        currentX++;
+                        break;
+                    case ConsoleKey.UpArrow:
+                        currentY--;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        currentY++;
+                        break;
+                    case ConsoleKey.B:
+                        var newBorder = new Borders(false);
+                        newBorder.PositionX = currentX;
+                        newBorder.PositionY = currentY;
+                        LineBorders.Add(newBorder);
+                        GUI.PrintBorder(newBorder);
+                        break;
+                    case ConsoleKey.D:
+                        Borders BorderToDelete = LookForBorder(currentX, currentY);
+                        GUI.CleanPosition(BorderToDelete, currentX, currentY);
+                        LineBorders.Remove(BorderToDelete);
+                        break;
+                    default:
+                        break;
+                }
+                
+            }
+        }
+
+        private Borders LookForBorder(int currentX, int currentY)
+        {
+            foreach (var Border in LineBorders)
+            {
+                if ((Border.PositionX == currentX) && (Border.PositionY == currentY))
+                {
+                    return Border;
+                }
+            }
+            return null;
         }
 
         internal void PlaySimulation()

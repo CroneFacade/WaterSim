@@ -8,14 +8,14 @@ namespace WaterSim
 {
     public static class GUI
     {
-        public static void CleanPosition(Borders empty, int currentX, int currentY)
+        public static void CleanPosition(Entity empty, int currentX, int currentY)
         {
             if (empty == null)
             {
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.SetCursorPosition(currentX, currentY);
                 Console.Write(" ");
-                Console.ResetColor();
+                //Console.ResetColor();
                 Console.SetCursorPosition(75, 20);
             }
             else
@@ -23,17 +23,17 @@ namespace WaterSim
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.SetCursorPosition(currentX, currentY);
                 Console.Write(empty.PrintedName);
-                Console.ResetColor();
+                //Console.ResetColor();
                 Console.SetCursorPosition(75, 20);
             }
         }
 
-        internal static void PrintBorder(Borders newBorder)
+        internal static void PrintEntity(Entity newEntity)
         {
-            Console.SetCursorPosition(newBorder.PositionX, newBorder.PositionY);
-            Console.BackgroundColor = ConsoleColor.Red;
-            Console.Write(newBorder.PrintedName);
-            Console.ResetColor();
+            Console.SetCursorPosition(newEntity.PositionX, newEntity.PositionY);
+            //Console.BackgroundColor = ConsoleColor.Red;
+            Console.Write(newEntity.PrintedName);
+            //Console.ResetColor();
             Console.SetCursorPosition(75, 20);
         }
 
@@ -42,8 +42,9 @@ namespace WaterSim
             Console.SetCursorPosition(currentX, currentY);
             Console.BackgroundColor = ConsoleColor.Red;
             Console.Write(" ");
-            Console.ResetColor();
+            //Console.ResetColor();
             Console.SetCursorPosition(75, 20);
         }
+
     }
 }

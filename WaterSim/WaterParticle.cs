@@ -5,17 +5,19 @@ using System.Text;
 
 namespace WaterSim
 {
-    public class Borders : Entity
+    class WaterParticle : Entity
     {
         public string PrintedName { get; set; }
-        public bool Breakable { get; set; }
         public int PositionX { get; set; }
         public int PositionY { get; set; }
+        public bool CanMove { get; set; }
 
-        public Borders(bool breakable)
+        public WaterParticle(int x, int y)
         {
-            PrintedName = "#";
-            this.Breakable = breakable;
+            CanMove = true;
+            PrintedName = "0";
+            PositionX = x;
+            PositionY = y;
         }
     }
 }

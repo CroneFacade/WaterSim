@@ -108,7 +108,7 @@ namespace WaterSim
 
         internal void PlaySimulation()
         {
-            Console.ForegroundColor = ConsoleColor.Blue;
+
             int currentX = 0;
             int currentY = 0;
             bool keepGoing = true;
@@ -137,6 +137,7 @@ namespace WaterSim
                         GUI.CurrentCursorPosition(currentX, currentY);
                         break;
                     case ConsoleKey.Enter:
+                        Console.ForegroundColor = ConsoleColor.Blue;
                         BeginWaterSim(currentX, currentY);
                         break;
                     default:
@@ -153,7 +154,7 @@ namespace WaterSim
             bool keepGoing = true;
             while (keepGoing)
             {
-                System.Threading.Thread.Sleep(25);
+                System.Threading.Thread.Sleep(250);
                 var newWater = CreateNewWaterParticle(currentX, currentY);
                 GUI.PrintEntity(newWater);
                 MakeWaterFall();
@@ -162,6 +163,7 @@ namespace WaterSim
 
         private void MakeWaterFall()
         {
+            Random rnd = new Random();
             foreach (var waterParticle in ListOfWater)
             {
                 bool blockedBelow = CheckIfBlockedBelow(waterParticle);
@@ -173,15 +175,16 @@ namespace WaterSim
 
                     if (!blockedLeft && blockedRight)
                     {
-                        MoveParticle(waterParticle, waterParticle.PositionX - 1, waterParticle.PositionY);   
+                        MoveParticle(waterParticle, waterParticle.PositionX - 1, waterParticle.PositionY);
                     }
                     else if (blockedLeft && !blockedRight)
                     {
                         MoveParticle(waterParticle, waterParticle.PositionX + 1, waterParticle.PositionY);
                     }
-                    else
+                    else if (!blockedLeft && !blockedRight)
                     {
-
+                        var randomDirection = rnd.Next(-1, 2);
+                        MoveParticle(waterParticle, waterParticle.PositionX + randomDirection, waterParticle.PositionY);
                     }
                 }
                 else
@@ -189,6 +192,7 @@ namespace WaterSim
                     MoveParticle(waterParticle, waterParticle.PositionX, (waterParticle.PositionY + 1));
                 }
             }
+
 
         }
 

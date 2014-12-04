@@ -18,6 +18,7 @@ namespace WaterSim
 
         internal void CreateMap()
         {
+            GUI.PrintInstructions();
             int currentX = 0;
             int currentY = 0;
             bool keepGoing = true;
@@ -152,7 +153,7 @@ namespace WaterSim
             bool keepGoing = true;
             while (keepGoing)
             {
-                System.Threading.Thread.Sleep(100);
+                System.Threading.Thread.Sleep(25);
                 var newWater = CreateNewWaterParticle(currentX, currentY);
                 GUI.PrintEntity(newWater);
                 MakeWaterFall();
